@@ -12,7 +12,7 @@ To get a local copy up and running follow these simple steps:
 
 1. Clone it using git command:
 ```ruby
-git@github.com:gabrielyea/hello-rails-react.git
+git clone git@github.com:gabrielyea/hello-rails-react.git
 ```
 
 **Run in development (locally)**
