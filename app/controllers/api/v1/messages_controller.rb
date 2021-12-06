@@ -3,7 +3,7 @@ class Api::V1::MessagesController < ApplicationController
 
   def random_greeting
     @random = Message.order('RANDOM()').limit(1)
-    render json: @random
+    render json: { data: { id: @random[0].id, message: @random[0].greeting } }
   end
 
   def index

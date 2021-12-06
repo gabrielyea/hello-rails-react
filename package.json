@@ -13,6 +13,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^6.0.2",
     "react_ujs": "^2.6.1",
     "turbolinks": "^5.2.0",
@@ -24,13 +25,13 @@
     "@babel/core": "^7.15.0",
     "@babel/eslint-parser": "^7.15.0",
     "@babel/plugin-syntax-jsx": "^7.14.5",
-    "webpack-dev-server": "^3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "webpack-dev-server": "^3"
   }
 }

@@ -1,40 +1,42 @@
+/* eslint-disable no-param-reassign */
 import {
+  createEntityAdapter,
   createAsyncThunk,
-  createSlice
+  createSlice,
 } from '@reduxjs/toolkit';
-import axios from 'axios';
-export const fetchUsers = createAsyncThunk('todos/fetchUsers', async () => {
-  const {
-    data
-  } = await axios.get(
-    'https://jsonplaceholder.typicode.com/users'
-  );
-  return data;
+
+export const greetingsAdapter = createEntityAdapter();
+
+const initialState = greetingsAdapter.getInitialState({ status: 'idle' });
+
+export const fetchGreetings = createAsyncThunk('greetings/fetchGreeting', async () => {
+  const response = await fetch('api/v1/random_greeting');
+  const res = await response.json();
+  return res;
 });
-const userSlice = createSlice({
-  name: 'users',
-  initialState: {
-    entities: [],
-    status: 'idle'
-  },
+
+const greetingsSlice = createSlice({
+  name: 'greetings',
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state, action) => {
+      .addCase(fetchGreetings.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        const newUsers = {};
-        action.payload.forEach((user) => {
-          newUsers[user.id] = user;
-        });
-        state.entities = newUsers;
-        state.status = 'idle';
-      })
-      .addCase(fetchUsers.rejected, (state) => {
-        console.log('error');
+      .addCase(fetchGreetings.fulfilled, greetingsAdapter.upsertMany)
+      .addCase(fetchGreetings.rejected, (state) => {
         state.status = 'idle';
       });
-  }
+  },
 });
-export default userSlice.reducer;
+
+export const {
+  selectById: selectGreetingById,
+  selectIds: selectGreetingId,
+  selectEntities: selectGreetingEntitites,
+  selectAll: selectAllGreetings,
+  selectTotal: selectTotalGreeting,
+} = greetingsAdapter.getSelectors((state) => state.greetings);
+
+export default greetingsSlice.reducer;
